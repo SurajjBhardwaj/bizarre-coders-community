@@ -38,9 +38,43 @@ li {
   background: rgba(255, 255, 255, 0.09);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid gray;
 }
 
 body{
 background-image: radial-gradient(circle, #340537, #2d0626, #240519, #18020d, #000000);
+overflow-x: hidden;
+
+}
+
+.dropdown{
+  z-index: 999;
+}
+
+::-webkit-scrollbar-track {
+  --tw-bg-opacity: 1.5;
+  background: rgb(139 92 246 / var(--tw-bg-opacity));
+}
+
+::-webkit-scrollbar-thumb {
+  --tw-bg-opacity: 1.5;
+  background: #340537;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  height: 5px;
+  border-radius: 10px;
+  border: 1px solid white;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+::-webkit-scrollbar-track {
+  background: #555;
+  border: 1px solid #ccc;
 }

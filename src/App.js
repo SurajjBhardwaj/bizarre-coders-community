@@ -6,30 +6,39 @@ import Team from "./components/Team";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Contributor from "./components/Contributor";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import LearnDSA from "./pages/LearnDSA";
+import Home from "./pages/Home";
+
 
 const App = () => {
   return (
     // <div className="p min-h-[100vh] ">
     //   <Navbar />
-    //   <Main />\
     //   <Footer />
-    //   <Team/>
+      // <Team/>
     // </div>
     <>
       <Router>
-        <Navbar />
-        <Main />
+        {/* <Navbar /> */}
+    {/* <Main /> */}
+        {/* <Main /> */}
         {/* <Team /> */}
-        <Contributor/>
+        {/* <Contributor/> */}
         <Routes>
           {/* <Route exact path="/" element={<Home />} /> */}
-          {/* <Route exa ct path="/Team" element={<Team />} /> */}
+          {/* <Route exact path="/Team" element={<Team />} /> */}
+          <Route exact path="/learnDSA" element={<LearnDSA />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/" element={<Home />} />
 
           {/* <Route exact path="/technology" element={<News setProgress={this.setProgress} key="technology" pageSize={6} country="in" category="Technology"/>} /> */}
         </Routes>
       </Router>
 
-      <Footer className="end-0" />
+      {/* <Footer className="end-0" /> */}
     </>
   );
 };
