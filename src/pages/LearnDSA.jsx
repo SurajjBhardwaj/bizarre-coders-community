@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import NavbarEl from "../components/NavbarEl";
 import Footer from "../components/Footer";
 
 const LearnDSA = () => {
   return (
     <>
-      <Navbar />
+      <NavbarEl />
       <div className="mt-10">
         <h1 className="text-white text-4xl font-bold text-center w-full ">
           Data Structures & Algorithms

@@ -42,7 +42,7 @@ li {
 }
 
 body{
-background-image: radial-gradient(circle, #340537, #2d0626, #240519, #18020d, #000000);
+/* background-image: radial-gradient(circle, #340537, #2d0626, #240519, #18020d, #000000); */
 overflow-x: hidden;
 
 }
