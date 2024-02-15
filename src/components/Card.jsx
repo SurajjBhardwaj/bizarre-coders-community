@@ -2,13 +2,13 @@ import React from "react";
 
 const Card = (props) => {
   return (
-    <div className="btn bg-slate-600 h-72 w-72 mx-24 my-16 py-2 hover:scale-[1.02] cursor-pointer ">
+    <div className="bg-white rounded-xl h-72 w-72 mx-24 my-16 py-2 hover:scale-[1.02] cursor-pointer ">
       <img
         src={props.img}
         alt=""
         className="h-48 w-48 mx-10 my-4 rounded-full   "
       />
-      <h1 className=" text-white text-lg font-semibold text-center font-mono">
+      <h1 className=" text-slate-800 text-lg font-semibold text-center font-mono">
         {props.name}
       </h1>
       {/* <div className='flex my-6 '>

@@ -11,10 +11,10 @@ import suraj from '../dukan/Suraj.png'
 
 const Team = (props) => {
   return (
-    <div className=''>
+    <div className='bg-slate-900 pt-8 my-12'>
     
 
-      <h1 className=' text-2xl text-center font-semibold   text-white p-2 mx-[550px] '>Our Team</h1>
+      <h1 className='text-2xl text-center font-semibold   text-white p-2 mx-[550px] bg-blue-400 rounded-3xl'>Our Team</h1>
       
       <div className="flex box-content">
       <Card name="Kamal Nayan" img={kamal} github={`https://github.com/saka015`} linkedin={'https://www.linkedin.com/in/saka015/'} />

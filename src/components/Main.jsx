@@ -1,34 +1,33 @@
-import { Accordion, AccordionItem } from "@nextui-org/react";
 import React from "react";
+import svg from '../assests/svg.svg'
 
 const Main = () => {
-  const defaultContent =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
-
   return (
     <div className="min-h-[100vh]">
-      <div className="grid place-items-center mt-48 gap-y-8  ">
-        <h1 className="text-7xl h-full text-white text-center mt- font-bold">
-          Breathing Code!
-        </h1>
+      <div className="flex mt-6 mx-12  gap-y-8  ">
+        <div className="flex-1 p-10 break-all">
+          <h1 className="text-blue-500 sm:flex hidden  sm:text-8xl font-bold">
+            Eat <br />
+            Sleep <br />
+            Code. <br /> Repeat
+          </h1>
 
-        <button className="ml-6 text-center p-1 text-white px-3 hover:opacity-70 btn font-bold">
-          Explore
-        </button>
-      </div>
-
-      <div className="mx-48">
-        <Accordion>
-          <AccordionItem key="1" aria-label="Accordion 1" title="Accordion 1">
-            {defaultContent}
-          </AccordionItem>
-          <AccordionItem key="2" aria-label="Accordion 2" title="Accordion 2">
-            {defaultContent}
-          </AccordionItem>
-          <AccordionItem key="3" aria-label="Accordion 3" title="Accordion 3">
-            {defaultContent}
-          </AccordionItem>
-        </Accordion>
+          <p className="mt-6 sm:flex hidden font-semibold text-gray-500">
+            {" "}
+            Creating & helping best coding minds!
+          </p>
+          <button className="sm:flex hidden text-blue-500 font-bold  border-2 rounded-3xl p-2 border-blue-400 my-6 hover:bg-blue-500 hover:text-white hover:scale-110 transition-all px-4">
+            Explore
+          </button>
+        </div>
+        <div className="flex-1 p-10 pt-28">
+          <img
+            className="rounded-md"
+            width="700"
+            src={svg}
+            alt="coding_boy"
+          />
+        </div>
       </div>
     </div>
   );

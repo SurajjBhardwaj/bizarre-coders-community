@@ -1,51 +1,115 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link,useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const [regDone, setRegDone] = useState(false);
+  const navigate = useNavigate();
+
+  const [credentials, setCredentials] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const regSet = () => {
+    if (credentials.password.length > 0) {
+      // Changed from credentials.password > 0 to credentials.password.length > 0
+      setRegDone(true);
+    }
+  };
+
+  const onChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value }); // Changed from square brackets to parentheses
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); //synthetic event
+    console.log(
+      JSON.stringify({
+        name: credentials.name,
+        email: credentials.email,
+        password: credentials.password,
+      })
+    );
+
+    const response = await fetch("http://localhost:5000/api/createuser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: credentials.name,
+        email: credentials.email,
+        password: credentials.password,
+      }),
+    });
+    const json = await response.json();
+    console.log(json);
+
+    if (!json.success) {
+      alert("Enter valid credentials!");
+    }
+    
+
+    if (json.success) {
+      navigate('/loginuser');
+    }
+  };
+
+  const gotcreateusered = () => {
+    if (regDone === true) {
+      alert("Registration Succesfull! Pls Login...");
+    }
+  };
+
   return (
     <div className="min-h-[70vh]">
-      <div className="btn sm:mx-96 sm:mt-10 my-4 flex min-h-full flex-1 flex-col justify-center px-2 py-2 lg:px-4">
+      <div className="bg-slate-800 rounded-3xl sm:mx-96 sm:mt-10 my-4 flex min-h-full flex-1 flex-col justify-center px-2 py-2 lg:px-4">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 className="mt-6 py-1   text-center text-2xl font-bold leading-9 tracking-tight  text-white">
+          <h2 className="mt-6 py-1   text-center text-2xl font-bold leading-9 tracking-tight  text-blue-200">
             Create a new account
           </h2>
         </div>
 
         <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="name"
-                className="text-left block text-sm font-medium leading-6 text-white"
+                className="text-left block text-sm font-medium leading-6 text-blue-100"
               >
                 Name
               </label>
               <div className="mt-2">
                 <input
+                  onChange={onChange}
+                  value={credentials.name}
                   id="name"
                   name="name"
-                  type="name"
+                  type="text" // Changed from type="name" to type="text"
                   autoComplete="name"
                   required
-                  className="px-2 text-md block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="px-2 text-md block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-blue-300 placeholder:text-blue-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
             <div>
               <label
                 htmlFor="email"
-                className="text-left block text-sm font-medium leading-6 text-white"
+                className="text-left block text-sm font-medium leading-6 text-blue-100"
               >
                 Email
               </label>
               <div className="mt-2">
                 <input
+                  onChange={onChange}
+                  value={credentials.email}
                   id="email"
                   name="email"
                   type="email"
                   autoComplete="email"
                   required
-                  className="px-2 text-md block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="px-2 text-md block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-blue-300 placeholder:text-blue-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -54,24 +118,21 @@ const Register = () => {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-white"
+                  className="block text-sm font-medium leading-6 text-blue-100"
                 >
                   Password
                 </label>
-                <div className="text-sm">
-                  <Link className="font-semibold text-red-200 hover:text-red-500">
-                    Forgot password?
-                  </Link>
-                </div>
               </div>
               <div className="mt-2">
                 <input
+                  onChange={onChange}
+                  value={credentials.password}
                   id="password"
                   name="password"
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="px-2 text-md block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
+                  className="px-2 text-md block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-blue-300 placeholder:text-blue-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -79,18 +140,18 @@ const Register = () => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md  px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 
-             hover:opacity-70 btn "
+                className="flex w-full justify-center rounded-3xl  px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+             hover:bg-blue-400 btn "
               >
                 Register
               </button>
             </div>
           </form>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
+          <p className="mt-10 text-center text-sm text-blue-500">
             Already a member?{" "}
             <Link
-              to="/login"
+              to="/loginuser"
               className="font-semibold leading-6 text-red-200 hover:text-green-500"
             >
               Login!
@@ -103,3 +164,268 @@ const Register = () => {
 };
 
 export default Register;
+
+
+// import React, { useState } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// import google from "../assests/google.svg";
+// import register from "../assests/register.svg";
+// import styled from "styled-components";
+
+// const Register = () => {
+//   const [regDone, setRegDone] = useState(false);
+
+//   const [credentials, setCredentials] = useState({
+//     name: "",
+//     email: "",
+//     password: "",
+//   });
+
+//   const regSet = () => {
+//     if (credentials.password.length > 0) {
+//       // Changed from credentials.password > 0 to credentials.password.length > 0
+//       setRegDone(true);
+//     }
+//   };
+
+//   const onChange = (e) => {
+//     setCredentials({ ...credentials, [e.target.name]: e.target.value }); // Changed from square brackets to parentheses
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault(); //synthetic event
+//     console.log(
+//       JSON.stringify({
+//         name: credentials.name,
+//         email: credentials.email,
+//         password: credentials.password,
+//       })
+//     );
+
+//     const response = await fetch("http://localhost:5000/api/createuser", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         name: credentials.name,
+//         email: credentials.email,
+//         password: credentials.password,
+//       }),
+//     });
+//     const json = await response.json();
+//     console.log(json);
+
+//     if (!json.success) {
+//       alert("Enter valid credentials!");
+//     }
+//   };
+
+//   const gotcreateusered = () => {
+//     if (regDone === true) {
+//       alert("Registration Succesfull! Pls Login...");
+//     }
+//   };
+
+//   const Main = styled.div`
+//     display: flex;
+//     background-color: blacksmoke;
+//     border-radius: 20px;
+//     margin: 2rem;
+//     height: 90vh;
+//     box-sizing: border-box;
+//   `;
+
+//   const Title = styled.h1`
+//     font-size: 2rem;
+//     text-align: center;
+//     color: black;
+//   `;
+
+//   const Label = styled.p`
+//     font-size: 14px;
+//     text-align: center;
+//     margin-bottom: 2rem;
+//     margin-top: 10px;
+//   `;
+
+//   const Flex = styled.div`
+//     display: flex;
+//   `;
+
+//   const Small = styled.p`
+//     font-size: 0.7rem;
+//   `;
+
+//   const Light = styled.p`
+//     font-size: 0.8rem;
+//     color: gray;
+//     opacity: 0.8;
+//   `;
+
+//   const Left = styled.div`
+//     flex: 7;
+//   `;
+
+//   const Right = styled.div`
+//     flex: 3;
+//     background-color: black;
+//     margin: 10px;
+//     border-radius: 10px;
+//     padding-left: 50px;
+//     padding-right: 50px;
+//     padding-top: 5rem;
+//     overflow: hidden;
+//   `;
+
+//   const Input = styled.div`
+//     display: flex;
+//     flex-direction: row;
+//     align-items: flex-end;
+//     display: inline-block;
+//     margin-top: 15px;
+//     margin-left: 2rem;
+//   `;
+
+//   const More = styled.div`
+//     display: flex;
+//     justify-content: flex-end;
+//     margin-right: 2rem;
+//     margin-top: 5px;
+//   `;
+
+//   const LoginBtn = styled.button`
+//     font-weight: bold;
+//     color: black;
+//     width: 80%;
+//     border: none;
+//     border-radius: 50px;
+//     padding: 12px;
+//     cursor: pointer;
+//     margin-bottom: 10px;
+//     font-size: 15px;
+//     margin-left: 2.5rem;
+//     margin-top: 2rem;
+//   `;
+
+//   const GoogleBtn = styled.button`
+//     display: flex;
+//     background-color: blacksmoke;
+//     color: black;
+//     width: 80%;
+//     border: none;
+//     border-radius: 50px;
+//     padding: 12px;
+//     cursor: pointer;
+//     margin-bottom: 10px;
+//     margin-left: 2.5rem;
+//     font-weight: bold;
+//   `;
+
+//   const Img = styled.img`
+//     margin-left: auto;
+//     margin-right: -45px;
+//   `;
+
+//   const P = styled.p`
+//     margin-left: auto;
+//     margin-right: auto;
+//     font-size: 15px;
+//     text-align: center;
+//   `;
+
+//   const Signup = styled.div`
+//     font-size: 13px;
+//     bottom: 0;
+//     text-align: center;
+//     margin-top: 1rem;
+//     cursor: pointer;
+//   `;
+
+//   const InputTag = styled.input`
+//     border: none;
+//     border-bottom: 1px solid black;
+//     width: 300px;
+//     color: gray;
+//     padding: 10px 5px;
+//     font-size: 15px;
+//   `;
+
+//   const Bold = styled.p`
+//     font-weight: 500;
+//   `;
+
+//   const LoginImg = styled.img`
+//     margin-top: 7rem;
+//     margin-left: 6rem;
+//   `;
+
+//   return (
+//     <Main className="main">
+//       {/* <Left className="left">
+//         <LoginImg disabled className="login-img" src={register} width="500" alt="" />
+//       </Left> */}
+//       <Right className="right-main">
+//         <Title className="title">Sign Up</Title>
+//         <Label className="title-label">Please enter your details</Label>
+//         <form onSubmit={handleSubmit} method="POST">
+//           <Input className="input-box">
+//             <label htmlFor="email">Name</label>
+//             <br />
+//             <InputTag
+//               onChange={onChange}
+//               value={credentials.name}
+//               className="input-tag"
+//               type="text"
+//               name="name"
+//             />
+//           </Input>
+//           <br />
+//           <Input className="input-box">
+//             <label htmlFor="email">Email</label>
+//             <br />
+//             <InputTag
+//               onChange={onChange}
+//               value={credentials.email}
+//               className="input-tag"
+//               type="email"
+//               name="email"
+//             />
+//           </Input>
+
+//           <br />
+//           <Input>
+//             <label htmlFor="password">Password</label>
+//             <br />
+//             <InputTag
+//               onChange={onChange}
+//               value={credentials.password}
+//               className="input-tag"
+//               type="password"
+//               name="password"
+//             />
+//           </Input>
+
+//           <LoginBtn
+//             type="submit"
+//             className="hover:bg-blue-400 active:scale-90 bg-blue-500 submitBtn"
+//           >
+//             Sign Up
+//           </LoginBtn>
+//           {/* <GoogleBtn className="submitBtn" type="submit">
+//             <Img className="google-img" src={google} width="20px" alt="" />
+//             <P>Sign Up with Google</P>
+//           </GoogleBtn> */}
+//           <Signup className="signup">
+//             Already have an account?{" "}
+//             <Link to="/loginuser">
+//               <strong className="hover:text-blue-500"> Log In</strong>
+//             </Link>
+//           </Signup>
+//         </form>
+//       </Right>
+//     </Main>
+//   );
+// };
+
+// export default Register;

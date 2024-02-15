@@ -1,5 +1,5 @@
 import React from "react";
-import NavbarEl from "./components/NavbarEl";
+import Navbar from "./components/Navbar";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
 import Team from "./components/Team";
@@ -10,28 +10,30 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import LearnDSA from "./pages/LearnDSA";
 import Home from "./pages/Home";
+import Events from "./pages/Events";
 
 const App = () => {
   return (
     // <div className="p min-h-[100vh] ">
-    //   <NavbarEl />
+    //   <Navbar />
     //   <Footer />
     // <Team/>
     // </div>
     <>
       <Router>
-        <NavbarEl />
+        {/* <Navbar /> */}
         {/* <Main /> */}
-        <Main />
+        {/* <Main /> */}
         {/* <Team /> */}
         {/* <Contributor/> */}
         <Routes>
           {/* <Route exact path="/" element={<Home />} /> */}
           {/* <Route exact path="/Team" element={<Team />} /> */}
           <Route exact path="/learnDSA" element={<LearnDSA />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/register" element={<Register />} />
-          {/* <Route exact path="/" element={<Home />} /> */}
+          <Route exact path="/loginuser" element={<Login />} />
+          <Route exact path="/createuser" element={<Register />} />
+          <Route exact path="/events" element={<Events />} />
+          <Route exact path="/" element={<Home />} />
 
           {/* <Route exact path="/technology" element={<News setProgress={this.setProgress} key="technology" pageSize={6} country="in" category="Technology"/>} /> */}
         </Routes>
