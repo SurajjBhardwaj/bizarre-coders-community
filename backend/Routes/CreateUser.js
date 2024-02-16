@@ -3,6 +3,8 @@ import { body, validationResult } from "express-validator";
 import express from "express";
 import jwt from "jsonwebtoken";
 import user from "../models/User.js";
+import Registration from "../models/registration.js"
+import { dblClick } from "@testing-library/user-event/dist/click.js";
 
 const router = express.Router();
 const jwtSecret = "MyNameisSakaKamalNayan";
@@ -36,6 +38,42 @@ router.post(
     }
   }
 );
+
+router.post("/registration", async (req, res) => {
+
+  try {
+    const { name, email, phoneNo, rollNo, year, branch, anyDoubt } = req.body;
+    if (!name || !email || !phoneNo || !rollNo || !year || !branch || !anyDoubt) {
+      
+      return res.status(400).json({ errors: "Please fill all the fields" });
+
+    }
+
+    const alreadyRegister = await Registration.findOne({ $and: [{ email }, { phoneNo }] });
+    if (alreadyRegister) {
+      return res.status(400).json({ errors: "You have already registered" });
+    }
+
+    const newRegistration = new Registration({
+      name,
+      email,
+      phoneNo,
+      rollNo,
+      year,
+      branch,
+      anyDoubt,
+    });
+    await newRegistration.save();
+    // console.log(data);
+   return res.status(200).json({ message: "registration Successful" });
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ errors: error.message });
+    
+  }
+});
+
 
 router.post(
   "/loginuser",
