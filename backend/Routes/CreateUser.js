@@ -4,6 +4,7 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import user from "../models/User.js";
 import Registration from "../models/registration.js"
+import nodemailer from "nodemailer";
 import { dblClick } from "@testing-library/user-event/dist/click.js";
 
 const router = express.Router();
@@ -54,6 +55,29 @@ router.post("/registration", async (req, res) => {
       return res.status(400).json({ errors: "You have already registered" });
     }
 
+    
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      port: 25,
+      secure:true,
+      auth: {
+        user: process.env.user,
+        pass: process.env.pass
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.user,
+      to: email,
+      subject: 'Congratulation! 🥳 Registration Successful',
+      html: `<h1>Hello ${name},</h1><p>Your registration is successful.</p> 
+      <p>Thank you for registering. we are excited to See You at the event on 21st feb.</p> 
+      <p>For any queries, you can contact us at bizarre.coders@gmail.com </p>
+      <p>Regards, <br> Bizarre Coders</p>`
+    };
+
+    transporter.sendMail(mailOptions);
     const newRegistration = new Registration({
       name,
       email,
@@ -64,13 +88,15 @@ router.post("/registration", async (req, res) => {
       anyDoubt,
     });
     await newRegistration.save();
-    // console.log(data);
-   return res.status(200).json({ message: "registration Successful" });
 
+  
+
+    
+
+    return res.status(200).json({ message: "registration Successful" });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ errors: error.message });
-    
   }
 });
 
