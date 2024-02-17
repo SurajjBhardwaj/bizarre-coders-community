@@ -1,14 +1,20 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
 
-// import dotenv from "dotenv";
-// dotenv.config();
+console.log(process.env.MONGO_URI);
 
-const mongoURI = "mongodb+srv://skn8454:saka123@cluster0.8snhuzo.mongodb.net/";
+const mongoURI =
+  process.env.MONGO_URI || "mongodb://localhost:27017/registration";
 
 const connect = async () => {
   try {
-    await mongoose.connect(mongoURI, { useNewUrlParser: true });
-    console.log("✅ Database Connected");
+    if (mongoose.connection.readyState === 0) {
+      await mongoose.connect(mongoURI, { useNewUrlParser: true });
+      console.log("✅ Database Connected");
+    } else {
+      console.log("Database already connected");
+    }
   } catch (error) {
     console.error("Error connecting to the database:", error.message);
   }
