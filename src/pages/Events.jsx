@@ -4,14 +4,19 @@ import Navbar from "../components/Navbar";
 import megabeg from "../assests/MegaBeginners.png";
 
 const Events = () => {
+    if (!localStorage.getItem("authToken")) {
+      return (
+        <div className="flex flex-col justify-center place-items-center pt-12">
+          <p>Please log in to view this content</p>
+          <Link to="/loginuser">Go to Login</Link>
+        </div>
+      );
+    }
+    
   return (
     <>
       <Navbar />
-      {!localStorage.getItem("authToken") ? (
-        <p className="text-center text-4xl mt-12 text-blue-400 font-bold">
-          Pls Login to explore for events!
-        </p>
-      ) : (
+    
         <div className=" ">
           <div className="grid justify-center py-6">
             <div className="bg-blue-100 p-2 rounded-md  grid justify-center w-48">
@@ -53,7 +58,7 @@ const Events = () => {
                 <button className="bg-gray-100 text-gray-600 font-semibold ml-4 p-2 rounded-lg">
                   STARTS 21/02/2021
                 </button>
-                <Link target="_saka" to="https://forms.gle/L9jwuHGXMqdXEUT7A">
+                <Link target="_saka" to="/regEvent">
                   {" "}
                   <button className="bg-blue-500 text-white font-semibold ml-36 p-2 px-4 rounded-lg hover:bg-blue-600">
                     Apply Now
@@ -63,7 +68,6 @@ const Events = () => {
             </div>
           </div>
         </div>
-      )}
     </>
   );
 };

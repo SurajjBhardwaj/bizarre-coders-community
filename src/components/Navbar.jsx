@@ -57,7 +57,7 @@ const Navbar = () => {
             <div className="gap-x-3">
               <button
                 onClick={handleDrop}
-                className=" active:scale-95 mx-2 p-1  px-3 hover:bg-blue-100 hover:text-blue-500  font-bold rounded-md text-gray-500"
+                className="hidden sm:inline active:scale-95 mx-2 p-1  px-3 hover:bg-blue-100 hover:text-blue-500  font-bold rounded-md text-gray-500"
               >
                 Resources
               </button>

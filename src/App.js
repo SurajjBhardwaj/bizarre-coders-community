@@ -11,6 +11,8 @@ import Register from "./components/Register";
 import LearnDSA from "./pages/LearnDSA";
 import Home from "./pages/Home";
 import Events from "./pages/Events";
+import Registration from "./pages/Registration";
+import RegSuccess from "./pages/RegSuccess";
 
 const App = () => {
   return (
@@ -33,6 +35,12 @@ const App = () => {
           <Route exact path="/loginuser" element={<Login />} />
           <Route exact path="/createuser" element={<Register />} />
           <Route exact path="/events" element={<Events />} />
+          <Route exact path="/registration" element={<Registration />} />
+          <Route
+            exact
+            path="/succesfully_registered"
+            element={<RegSuccess />}
+          />
           <Route exact path="/" element={<Home />} />
 
           {/* <Route exact path="/technology" element={<News setProgress={this.setProgress} key="technology" pageSize={6} country="in" category="Technology"/>} /> */}

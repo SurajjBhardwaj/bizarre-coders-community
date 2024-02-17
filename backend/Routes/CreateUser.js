@@ -44,7 +44,7 @@ router.post("/registration", async (req, res) => {
 
   try {
     const { name, email, phoneNo, rollNo, year, branch, anyDoubt } = req.body;
-    if (!name || !email || !phoneNo || !rollNo || !year || !branch || !anyDoubt) {
+    if (!name || !email || !phoneNo || !rollNo || !year || !branch ) {
       
       return res.status(400).json({ errors: "Please fill all the fields" });
 

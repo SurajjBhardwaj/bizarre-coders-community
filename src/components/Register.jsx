@@ -63,7 +63,7 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-[70vh]">
+    <div className="min-h-[70vh] scale-[0.8] sm:scale-[1]">
       <div className="bg-slate-800 rounded-3xl sm:mx-96 sm:mt-10 my-4 flex min-h-full flex-1 flex-col justify-center px-2 py-2 lg:px-4">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-6 py-1   text-center text-2xl font-bold leading-9 tracking-tight  text-blue-200">
