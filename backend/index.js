@@ -2,7 +2,7 @@ import express from "express";
 import connect from "./db.js";
 import createUserRouter from "./Routes/CreateUser.js";
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 connect();
 

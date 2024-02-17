@@ -55,6 +55,8 @@ const Navbar = () => {
 
           <div className="flex">
             <div className="gap-x-3">
+              {localStorage.getItem("authToken") ? (
+                <>
               <button
                 onClick={handleDrop}
                 className="hidden sm:inline active:scale-95 mx-2 p-1  px-3 hover:bg-blue-100 hover:text-blue-500  font-bold rounded-md text-gray-500"
@@ -62,8 +64,6 @@ const Navbar = () => {
                 Resources
               </button>
 
-              {localStorage.getItem("authToken") ? (
-                <>
                   <Link target="_saka" to="https://www.freecodecamp.org/">
                     <button className="active:scale-95 mx-2 p-1  px-3 hover:bg-blue-100 hover:text-blue-500   font-bold rounded-md text-gray-500">
                       Certifications
