@@ -2,6 +2,7 @@
   "name": "intern-task",
   "version": "0.1.0",
   "private": true,
+  "proxy":"https://bc-backend.onrender.com/",
   "dependencies": {
     "@heroicons/react": "^2.1.1",
     "@material-tailwind/react": "^2.1.8",
